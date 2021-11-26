@@ -3,3 +3,5 @@ Bul Qaraqalpaq tilindegi tekstlerdi orfografiyalıq qátelerge tekseriwshi siste
 ------------------------------------------
 
 It is a Karakalpak spell checking system
+
+------------------------------------------
