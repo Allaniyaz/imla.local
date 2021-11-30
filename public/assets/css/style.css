@@ -1,0 +1,36 @@
+#nukusweb {
+  color: white;
+}
+
+#nukusweb:hover {
+  color: darkblue;
+}
+
+.text-menu {
+    
+    width: 100%;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", "Arial",  sans-serif;
+  font-style: italic;
+  text-align: center;
+  font-variant-ligatures: normal;
+  font-size: 1.6rem;
+  letter-spacing: 0px;
+  color: rgb(214, 84, 9);
+}
+.tablica {
+    border: 3px solid rgb(184, 87, 63)!important; ;
+    
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+.nav-item .nav-link{
+  color:#dd5506!important;
+  font-size:1.1em;
+}
+
