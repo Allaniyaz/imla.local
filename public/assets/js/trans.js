@@ -1,4 +1,4 @@
-﻿//Karakalpak latin and cyrillic alphabet
+//Karakalpak latin and cyrillic alphabet
 var latin = ['Y', 'C', 'S', 'y', 'c', 's', 'A', 'Á', 'B', 'D', 'E', 'F', 'G', 'Ǵ', 'H', 'X', 'Í', 'I', 'J', 'K', 'Q', 'L', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'R', 'T', 'U', 'Ú', 'V', 'W', 'Z', 'Ya', 'Yu', 'Yo', 'Sh', 'Ch', 'Sh', 'a', 'á', 'b', 'd', 'e', 'f', 'g', 'ǵ', 'h', 'x', 'ı', 'i', 'j', 'k', 'q', 'l', 'm', 'n', 'ń', 'o', 'ó', 'p', 'r', 't', 'u', 'ú', 'v', 'w', 'z', 'ya', 'yu', 'yo', 'sh', 'ch', 'sh'];
 var kirill = ['Й', 'Ц', 'С','й', 'ц', 'с', 'А', 'Ә', 'Б', 'Д', 'Е', 'Ф', 'Г', 'Ғ', 'Ҳ', 'Х', 'Ы', 'И', 'Ж', 'К', 'Қ', 'Л', 'М', 'Н', 'Ң', 'О', 'Ө', 'П', 'Р', 'Т', 'У', 'Ү', 'В', 'Ў', 'З', 'Я', 'Ю', 'Ё', 'Ш', 'Ч', 'Щ', 'а', 'ә', 'б', 'д', 'е', 'ф', 'г', 'ғ', 'ҳ', 'х', 'ы', 'и', 'ж', 'к', 'қ', 'л', 'м', 'н', 'ң', 'о', 'ө', 'п', 'р', 'т', 'у', 'ү', 'в', 'ў', 'з', 'я', 'ю', 'ё', 'ш', 'ч', 'щ'];
 
@@ -11,7 +11,7 @@ var alphabet_new = ["Á", "á", "Í", "ı", "Ó", "ó", "Ú" ,"ú", "Ń", "ń", 
 var select = document.getElementById("select");
 var button = document.getElementById("button");
 
-button.addEventListener("click", function() {
+function actions() {
 
 	var option = select.options[select.selectedIndex].value;			
 	var received = document.getElementById("received").value;
@@ -105,18 +105,10 @@ button.addEventListener("click", function() {
 	var sended = received.join('');
 	document.getElementById("sended").value = sended;
 		
-});
+}
 
 
 
 select.addEventListener("change", function() {
-	
-	var option = select.options[select.selectedIndex].value;
-	if(option == 3) {
-		document.getElementById("button").textContent = " Өзгертиў ";
-	}
-	else {
-		document.getElementById("button").textContent = "Транслитерация";
-	}
-
+	actions();
 });

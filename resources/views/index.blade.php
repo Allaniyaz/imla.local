@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Spell-check</title>
+	<title>Қарақалпақ Имласы</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/bootstrap.css') }}">
     <style>
         * {
@@ -10,6 +10,9 @@
         }
         .nav-link {
             color: #d34c17;
+        }
+        ul.useful-links {
+            list-style: none;
         }
     </style>
 	<script type="text/javascript" src="{{ asset('/assets/js/jquery-3.3.1.min.js') }}"></script> 
@@ -42,13 +45,10 @@
                     <h2 class="h2 text-secondary text-center">Қарақалпақша орфографиялық тексериў</h2>
                 </div>
                 <div class="col-6">			
-                    <textarea name="text" id="textUser" class="form-control" rows="19"></textarea>
+                    <textarea name="text" id="textUser" class="form-control" rows="19" oninput="checkText()"></textarea>
                 </div>
                 <div class="col-6">
-                    <textarea class="texteditor" id="textResponse"></textarea>
-                </div>
-                <div class="col-md-12">
-                    <input class="btn btn-outline-success btn-lg m-2" type="button" value="Тексериў" name="" onclick="checkText()">
+                    <textarea class="texteditor textResponse" id="textResponse"></textarea>
                 </div>
             </div>
         </div>
@@ -70,11 +70,7 @@
                         </select>
                         <br>
                         <label for="received">Текстти киритиң:</label>
-                        <textarea id="received" class="form-control" cols="40" rows="8"></textarea>
-                        
-                        <div class="mt-3 mb-3 text-center">
-                            <button type="button" id="button" class="btn btn-outline-success">Транслитерация</button>
-                        </div>
+                        <textarea id="received" class="form-control" cols="40" rows="8" oninput="actions()"></textarea>
                         <label for="sended">Нәтийже:</label>
                         <textarea id="sended" class="form-control" cols="40" rows="8"></textarea>
                     </form>
@@ -83,7 +79,17 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">fffffwww</div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="alert alert-success mt-5">
+                <ul class="useful-links">
+                    <li class="mb-3 mt-2"><a href="http://www.shagalalab.com">shagalalab.com</a> - Қарақалпақ тилиндеги бағдарламалар лабораториясы</li>
+                    <li class="mb-3"><a href="http://kitapxana.com">kitapxana.com</a> - Қарақалпақ әдебиятының электрон китапханасы</li>
+                    <li class="mb-3"><a href="https://from-to.uz">from-to.uz</a> - Текстлерди Қарақалпақша-Өзбекше ҳәм Өзбекше-Қарақалпақша аўдармалайтуғын жәрдемшиңиз</li>
+                    <li class="mb-3"><a href="https://t.me/qrtrans_bot">@QrTrans_bot</a> - Телеграм мессенджеринде Қарақалпақша Латын-Кирилл ҳәм Кирилл-Латын Транслитератор, Сөзлик, Имла ҳ.т.б. жумысларыңызда сизиң жәрдемшиңиз</li>
+                    <li><a href="https://t.me/awdarma_bot">@awdarma_bot</a> - Телеграм мессенджеринде көплеген тиллерден Қарақалпақ тилине аўдарыўшы, аудиофайлларды текстке аўдарыўшы жәрдемшиңиз</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 
