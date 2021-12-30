@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Letter;
 use App\Models\Word;
+use App\Models\Tusindirme;
+
 
 class HomepageController extends Controller
 {
@@ -70,6 +72,23 @@ class HomepageController extends Controller
 			echo "<br>";
 		}
     }
+
+	public function explanation(Request $request)
+	{
+		$request->validate([
+            'word' => 'required|string'
+        ]);
+
+		$word = $request->word;
+
+		$data = Tusindirme::where('word', mb_strtolower($word))->/* where('checksum', $this->calc_sum($word))-> */first();
+
+		if($data) {
+			echo $data->meaning;
+		} else {
+			echo "Кеширесиз, сиз излеген сөз базада табылмады.";
+		} 
+	}
 
     public function calc_sum($word) 
     {

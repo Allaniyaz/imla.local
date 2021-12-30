@@ -28,18 +28,21 @@
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active h5" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Орфография</a>
+          <a class="nav-link active h5" id="pills-spelling-tab" data-toggle="pill" href="#pills-spelling" role="tab" aria-controls="pills-spelling" aria-selected="true">Орфография</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link h5" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Транслитерация</a>
+          <a class="nav-link h5" id="pills-transliteration-tab" data-toggle="pill" href="#pills-transliteration" role="tab" aria-controls="pills-transliteration" aria-selected="false">Транслитерация</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link h5" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Пайдалы Силтемелер</a>
+            <a class="nav-link h5" id="pills-explanation-tab" data-toggle="pill" href="#pills-explanation" role="tab" aria-controls="pills-explanation" aria-selected="false">Түсиндирме сөзлик</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link h5" id="pills-usefullinks-tab" data-toggle="pill" href="#pills-usefullinks" role="tab" aria-controls="pills-usefullinks" aria-selected="false">Пайдалы Силтемелер</a>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
 
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="tab-pane fade show active" id="pills-spelling" role="tabpanel" aria-labelledby="pills-spelling-tab">
             <div class="row text-center">
                 <div class="col-12 m-3">
                     <h2 class="h2 text-secondary text-center">Қарақалпақша орфографиялық тексериў</h2>
@@ -53,7 +56,7 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="tab-pane fade" id="pills-transliteration" role="tabpanel" aria-labelledby="pills-transliteration-tab">
             <div class="row">
                 <div class="col-12 m-3">
                     <h2 class="h2 text-secondary text-center">Қарақалпақша Транслитератор</h2>
@@ -61,7 +64,7 @@
                 <br>
                 <div class="col-9">
                     
-                    <form action="trans.php" class="form" method="post">
+                    <form>
                         <label for="select">Сайлаң</label>                        
                         <select name="method" class="form-control" id="select">
                             <option value="1">Кирилл -> Латын</option>
@@ -79,10 +82,32 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <div class="tab-pane fade" id="pills-explanation" role="tabpanel" aria-labelledby="pills-explanation-tab">
+            <div class="row">
+                <div class="col-12 m-3">
+                    <h2 class="h2 text-secondary text-center">Түсиндирме сөзлик</h2>
+                </div>
+                <br>
+                <div class="col-9">
+                    <form>
+                        <label for="expWord">Сөзди киритиң:</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control w-25 mr-2" name="expWord" id="expWord">
+                            <button type="button" class="btn btn-outline-secondary" onclick="explanation()">Излеў</button>
+                        </div>
+                        <br><br>
+                        <label for="expText">Мәниси:</label>
+                        <textarea id="expText" name="expText" class="form-control" cols="30" rows="8"></textarea>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-usefullinks" role="tabpanel" aria-labelledby="pills-usefullinks-tab">
             <div class="alert alert-success mt-5">
                 <ul class="useful-links">
-                    <li class="mb-3 mt-2"><a href="http://www.shagalalab.com">shagalalab.com</a> - Қарақалпақ тилиндеги бағдарламалар лабораториясы</li>
+                    <li class="mb-3 mt-2"><a href="http://www.shagalalab.com">shejire.uz</a> - Қарақалпақ руўлары</li>
+                    <li class="mb-3"><a href="http://www.shagalalab.com">shagalalab.com</a> - Қарақалпақ тилиндеги бағдарламалар лабораториясы</li>
                     <li class="mb-3"><a href="http://kitapxana.com">kitapxana.com</a> - Қарақалпақ әдебиятының электрон китапханасы</li>
                     <li class="mb-3"><a href="https://from-to.uz">from-to.uz</a> - Текстлерди Қарақалпақша-Өзбекше ҳәм Өзбекше-Қарақалпақша аўдармалайтуғын жәрдемшиңиз</li>
                     <li class="mb-3"><a href="https://t.me/qrtrans_bot">@QrTrans_bot</a> - Телеграм мессенджеринде Қарақалпақша Латын-Кирилл ҳәм Кирилл-Латын Транслитератор, Сөзлик, Имла ҳ.т.б. жумысларыңызда сизиң жәрдемшиңиз</li>
@@ -115,6 +140,20 @@
 			}
 		});
 	}
+
+    function explanation() {
+        $.ajax({
+            url: "/explanation",
+            type: "POST",
+            data: { 
+                '_token': "{{ csrf_token() }}",
+                word: $('#expWord').val()
+            },
+            success: function(data) {
+                $('#expText').html(data);
+            }
+        });
+    }
 </script>
 <script src="{{ asset('/assets/js/trans.js') }}"></script>
 </body>
