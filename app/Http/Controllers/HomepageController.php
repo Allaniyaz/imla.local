@@ -55,7 +55,13 @@ class HomepageController extends Controller
 							$deleted .= array_pop($word);
 							$x = implode("", $word);
 							$x_sum = $this->calc_sum($x);
-							$exist_w = Word::where('title', mb_strtolower($x))->where('checksum', $x_sum)->get();
+							
+							$x = str_replace('Í', 'ı', $x);
+
+							echo mb_strtolower($x);
+							return false;
+
+							$exist_w = Word::where('title', mb_strtolower($x))/*->where('checksum', $x_sum)*/->get();
 
 							if($exist_w->count() > 0) {
 								$response .= "<span style='color: green;'>{$x}</span>";
@@ -81,12 +87,12 @@ class HomepageController extends Controller
 
 		$word = $request->word;
 
-		$data = Tusindirme::where('word', mb_strtolower($word))->/* where('checksum', $this->calc_sum($word))-> */first();
+		$data = Tusindirme::where('word', mb_strtolower($word))->where('checksum', $this->calc_sum($word))->first();
 
 		if($data) {
 			echo $data->meaning;
 		} else {
-			echo "Кеширесиз, сиз излеген сөз базада табылмады.";
+			echo "<span style='font-size: 18px; color: #e74c3c;'>Кеширесиз, сиз излеген сөз базада табылмады.</span>";
 		} 
 	}
 
@@ -100,8 +106,7 @@ class HomepageController extends Controller
 		$read = 0;
         
         $start = microtime();
-        for($k = 0; $k < count($word); $k++) 
-		{
+        for($k = 0; $k < count($word); $k++) {
 			if($word[$k] == 'í') $word[$k] = 'ı';
 			for($j=$read; $j<count($letters); $j++) {
 				if($word[$k] == $letters[$j]['title']) {
@@ -113,4 +118,14 @@ class HomepageController extends Controller
 
         return $sum_word;
     }
+
+	public function update_checksum()
+	{
+		$words = Tusindirme::get();
+		foreach($words as $word) {
+			$checksum = $this->calc_sum($word->word);
+			Tusindirme::where('word', $word->word)->update(['checksum' => $checksum]);
+		}
+	}
+
 }

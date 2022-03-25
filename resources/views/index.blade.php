@@ -124,6 +124,7 @@
 	$( document ).ready( function () {
 		$('.texteditor').ckeditor();
 		//$('.texteditor').attr('rows', '50');
+        $('#expText').ckeditor();
 	});
 
 	function checkText() {
@@ -150,7 +151,7 @@
                 word: $('#expWord').val()
             },
             success: function(data) {
-                $('#expText').html(data);
+                $('#expText').val(data);
             }
         });
     }

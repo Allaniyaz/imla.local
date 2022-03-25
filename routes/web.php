@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\HomepageController@index');
 Route::post('/check', 'App\Http\Controllers\HomepageController@check');
 Route::post('/explanation', 'App\Http\Controllers\HomepageController@explanation');
+Route::get('/update_checksum', 'App\Http\Controllers\HomepageController@update_checksum');
