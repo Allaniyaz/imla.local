@@ -11,6 +11,8 @@ class Tusindirme extends Model
 
     protected $table = 'tusindirme';
 
+    public $timestamps = false;
+
     protected static function booted()
     {
         // static::created(function ($tusindirme) {
