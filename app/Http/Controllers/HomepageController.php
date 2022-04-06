@@ -90,9 +90,23 @@ class HomepageController extends Controller
 		$data = Tusindirme::where('word', mb_strtolower($word))->where('checksum', $this->calc_sum($word))->first();
 
 		if($data) {
-			echo $data->meaning;
+			echo "<span style='font-size: 15px;'><b>$word</b> - $data->meaning</span>";
 		} else {
-			echo "<span style='font-size: 18px; color: #e74c3c;'>Кеширесиз, сиз излеген сөз базада табылмады.</span>";
+			
+			$similarData = Tusindirme::where('word', 'like', '%'.mb_strtolower($word).'%')->get();
+
+			if($similarData->count() > 0) {
+				$str = "<span style='font-size: 17px; color: #e74c3c;'>Кеширесиз, сиз излеген сөз базада табылмады.</span><hr>";
+				$str .= "<span style='font-size: 15px;'>Сиз излеген сөзге уқсас сөзлер:</span><br><br>";
+				$i = 1;
+				foreach($similarData as $sml) {
+					$str .= "<span style='font-size: 14px;'>" . ($i++) . ") <b>" . $sml->word . "</b> - ". $sml->meaning . "</span>";
+				}
+			} else {
+				$str = "<span style='font-size: 17px; color: #e74c3c;'>Кеширесиз, сиз излеген сөз базада табылмады.sss</span><br><br>";
+			}
+			
+			return $str;
 		} 
 	}
 
