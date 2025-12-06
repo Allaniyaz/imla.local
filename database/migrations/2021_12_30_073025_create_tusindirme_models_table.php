@@ -13,7 +13,7 @@ class CreateTusindirmeModelsTable extends Migration
      */
     public function up()
     {
-        if(!Schema::has('tusindirme')) {
+        if(!Schema::hasTable('tusindirme')) {
             Schema::create('tusindirme', function (Blueprint $table) {
                 $table->id();
                 $table->string('word', 500)->unique();
