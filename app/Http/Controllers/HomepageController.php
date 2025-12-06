@@ -23,16 +23,16 @@ class HomepageController extends Controller
 
 		$text = $request->text;
 		$cols = explode("\n", $text);
-        
-		foreach($cols as $c) 
+
+		foreach($cols as $c)
 		{
 			$str = $c;
 			$original = $str;
-			
+
 			$str = explode(" ", $str);
 
 			$sum_arr = [];
-			for($i=0; $i<count($str); $i++) 
+			for($i=0; $i<count($str); $i++)
 			{
 				$response = $deleted = "";
 
@@ -55,13 +55,10 @@ class HomepageController extends Controller
 							$deleted .= array_pop($word);
 							$x = implode("", $word);
 							$x_sum = $this->calc_sum($x);
-							
+
 							$x = str_replace('Í', 'ı', $x);
 
-							echo mb_strtolower($x);
-							return false;
-
-							$exist_w = Word::where('title', mb_strtolower($x))/*->where('checksum', $x_sum)*/->get();
+							$exist_w = Word::where('title', mb_strtolower($x))->get(); //maybe should also ->where('checksum', $x_sum)
 
 							if($exist_w->count() > 0) {
 								$response .= "<span style='color: green;'>{$x}</span>";
@@ -92,7 +89,7 @@ class HomepageController extends Controller
 		if($data) {
 			echo "<span style='font-size: 15px;'><b>$word</b> - $data->meaning</span>";
 		} else {
-			
+
 			$similarData = Tusindirme::where('word', 'like', '%'.mb_strtolower($word).'%')->get();
 
 			if($similarData->count() > 0) {
@@ -105,20 +102,20 @@ class HomepageController extends Controller
 			} else {
 				$str = "<span style='font-size: 17px; color: #e74c3c;'>Кеширесиз, сиз излеген сөз базада табылмады.sss</span><br><br>";
 			}
-			
+
 			return $str;
-		} 
+		}
 	}
 
-    public function calc_sum($word) 
+    public function calc_sum($word)
     {
 		$letters = Letter::all()->toArray();
-        
+
 		$word = preg_split('//u', mb_strtolower($word), null, PREG_SPLIT_NO_EMPTY);
-		$sum_word = 0;	
+		$sum_word = 0;
 
 		$read = 0;
-        
+
         $start = microtime();
         for($k = 0; $k < count($word); $k++) {
 			if($word[$k] == 'í') $word[$k] = 'ı';
